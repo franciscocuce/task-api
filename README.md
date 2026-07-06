@@ -39,9 +39,9 @@ curl http://localhost:3000/api/health
 api/
   src/
     config/        # configuración de entorno
-    modules/       # auth, tasks, users (por venir)
-    middlewares/   # auth, roles, manejo de errores (por venir)
-    utils/         # jwt, hash, helpers (por venir)
-    app.ts         # crea la app Express (exportable para tests)
+    modules/       # auth, tasks, users
+    middlewares/   # auth, roles, manejo de errores
+    utils/         # jwt, hash, helpers
+    app.ts         # crea la app Express
     server.ts      # levanta el servidor
 ```
