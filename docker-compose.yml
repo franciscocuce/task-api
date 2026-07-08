@@ -17,5 +17,25 @@ services:
       timeout: 5s
       retries: 5
 
+  api:
+    build:
+      context: ./api
+    container_name: task_api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      # adentro de docker el host es "db" y el puerto 5432 (no localhost:5433)
+      DATABASE_URL: 'postgresql://postgres:postgres@db:5432/task_api?schema=public'
+      JWT_ACCESS_SECRET: 'cambiame-por-un-secreto-largo-en-produccion'
+      JWT_REFRESH_SECRET: 'cambiame-por-otro-secreto-largo-en-produccion'
+      JWT_ACCESS_EXPIRES_IN: '15m'
+      JWT_REFRESH_EXPIRES_IN: '7d'
+    ports:
+      - '3000:3000'
+
 volumes:
   postgres_data:

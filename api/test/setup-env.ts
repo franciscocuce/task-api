@@ -1,5 +1,4 @@
 import { config } from 'dotenv';
 
-// Corre antes que cualquier módulo de la app: fuerza las variables de .env.test
-// (base de datos de test, secretos de test) por encima de las de .env.
+// tiene que correr antes que env.ts; override pisa lo que haya en .env
 config({ path: '.env.test', override: true });

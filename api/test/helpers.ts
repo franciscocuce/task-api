@@ -3,16 +3,14 @@ import { prisma } from '../src/config/prisma';
 import { hashPassword } from '../src/utils/hash';
 import { signAccessToken } from '../src/utils/jwt';
 
-// Deja la base limpia entre tests. Borrar usuarios arrastra sus tareas por el
-// onDelete: Cascade del schema.
+// borrar users se lleva puestas sus tasks (onDelete: Cascade)
 export async function resetDb(): Promise<void> {
   await prisma.user.deleteMany();
 }
 
 let counter = 0;
 
-// Crea un usuario real en la base de test y devuelve un token válido para él,
-// así los tests pueden pegarle a las rutas protegidas sin pasar por el login.
+// devuelvo el token ya firmado para no loguearme en cada test
 export async function createUser(
   overrides: { email?: string; role?: Role; password?: string } = {},
 ) {
